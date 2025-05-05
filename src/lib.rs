@@ -8,4 +8,4 @@ pub mod ed25519_verify;
 
 // Re-export the main types for convenience
 pub use ed25519_validation::Ed25519Preprocessed;
-pub use ed25519_verify::ed25519_verify;
+pub use ed25519_verify::{ed25519_verify, ed25519_verify_input_from_preprocessed, VerifyInput};
