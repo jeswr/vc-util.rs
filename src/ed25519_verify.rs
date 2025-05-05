@@ -7,12 +7,14 @@ use ed25519_dalek::{Signature, Verifier, VerifyingKey};
 use serde::{Deserialize, Serialize};
 use sha2::{Digest, Sha256};
 
+use crate::Ed25519Preprocessed;
+
 #[derive(Serialize, Deserialize)]
-pub struct VerifyInput<'a> {
-    canonical_document: &'a str,
-    canonical_proof: &'a str,
-    public_key: &'a str,
-    proof: &'a str,
+pub struct VerifyInput {
+    canonical_document: String,
+    canonical_proof: String,
+    public_key: String,
+    proof: String,
 }
 
 pub fn ed25519_verify(verify: VerifyInput) -> Result<(), String> {
@@ -42,4 +44,25 @@ pub fn ed25519_verify(verify: VerifyInput) -> Result<(), String> {
         .map_err(|_| "Signature verification failed")?;
 
     Ok(())
+}
+
+pub fn ed25519_verify_input_from_preprocessed(preprocessed: Ed25519Preprocessed) -> Result<VerifyInput, String> {
+    // Remove the 'z' prefix and decode base58
+    let public_key_multibase = &preprocessed.verification_method.public_key_multibase;
+    if !public_key_multibase.starts_with('z') {
+        return Err("Invalid public key multibase format".to_string());
+    }
+
+    // Decode the proof value (remove 'z' prefix and decode base58)
+    let proof_value = &preprocessed.proof.proof_value;
+    if !proof_value.starts_with('z') {
+        return Err("Invalid proof value format".to_string());
+    }
+
+    return Ok(VerifyInput {
+        canonical_document: preprocessed.verify_data.canonical_document,
+        canonical_proof: preprocessed.verify_data.canonical_proof,
+        public_key: public_key_multibase[1..].to_string(),
+        proof: proof_value[1..].to_string(),
+    });
 }
