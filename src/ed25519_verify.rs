@@ -40,13 +40,18 @@ pub fn ed25519_verify(verify: VerifyInput) -> Result<(), String> {
     // Verify the signature against the concatenated hash
     VerifyingKey::from_bytes(&public_key_bytes[2..].try_into().unwrap())
         .unwrap()
-        .verify(&message_bytes, &Signature::from_bytes(&signature_bytes.try_into().unwrap()))
+        .verify(
+            &message_bytes,
+            &Signature::from_bytes(&signature_bytes.try_into().unwrap()),
+        )
         .map_err(|_| "Signature verification failed")?;
 
     Ok(())
 }
 
-pub fn ed25519_verify_input_from_preprocessed(preprocessed: Ed25519Preprocessed) -> Result<VerifyInput, String> {
+pub fn ed25519_verify_input_from_preprocessed(
+    preprocessed: Ed25519Preprocessed,
+) -> Result<VerifyInput, String> {
     // Remove the 'z' prefix and decode base58
     let public_key_multibase = &preprocessed.verification_method.public_key_multibase;
     if !public_key_multibase.starts_with('z') {
@@ -65,4 +70,54 @@ pub fn ed25519_verify_input_from_preprocessed(preprocessed: Ed25519Preprocessed)
         public_key: public_key_multibase[1..].to_string(),
         proof: proof_value[1..].to_string(),
     });
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use std::fs;
+
+    #[test]
+    fn test_ed25519_verify_from_preprocessed() {
+        // Read the preprocessed JSON file
+        let json_str = fs::read_to_string("ed25519-preprocessed.json")
+            .expect("Failed to read ed25519-preprocessed.json");
+
+        // Parse the JSON into Ed25519Preprocessed struct
+        let preprocessed: Ed25519Preprocessed =
+            serde_json::from_str(&json_str).expect("Failed to parse preprocessed JSON");
+
+        // Convert to VerifyInput
+        let verify_input = ed25519_verify_input_from_preprocessed(preprocessed)
+            .expect("Failed to create verify input");
+
+        // Verify the signature
+        ed25519_verify(verify_input).expect("Signature verification failed");
+    }
+
+    #[test]
+    fn test_ed25519_verify_with_serialization() {
+        // Read the preprocessed JSON file
+        let json_str = fs::read_to_string("ed25519-preprocessed.json")
+            .expect("Failed to read ed25519-preprocessed.json");
+
+        // Parse the JSON into Ed25519Preprocessed struct
+        let preprocessed: Ed25519Preprocessed =
+            serde_json::from_str(&json_str).expect("Failed to parse preprocessed JSON");
+
+        // Convert to VerifyInput
+        let verify_input = ed25519_verify_input_from_preprocessed(preprocessed)
+            .expect("Failed to create verify input");
+
+        // Serialize to string
+        let serialized =
+            serde_json::to_string(&verify_input).expect("Failed to serialize verify input");
+
+        // Deserialize back to VerifyInput
+        let deserialized: VerifyInput =
+            serde_json::from_str(&serialized).expect("Failed to deserialize verify input");
+
+        // Verify the signature
+        ed25519_verify(deserialized).expect("Signature verification failed");
+    }
 }

@@ -119,7 +119,7 @@ impl Ed25519Preprocessed {
         if !proof_value.starts_with('z') {
             return Err("Invalid proof value format".to_string());
         }
-        
+
         let base58_proof = &proof_value[1..];
         let signature_bytes = bs58::decode(base58_proof)
             .into_vec()
@@ -163,7 +163,6 @@ mod tests {
 
         // Run the validation
         let result = preprocessed.validate();
-        println!("Validation result: {:?}", result);
         assert!(result.is_ok(), "Validation failed: {:?}", result.err());
     }
 } 
