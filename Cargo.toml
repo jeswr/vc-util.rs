@@ -1,0 +1,13 @@
+[package]
+name = "vc-utils"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ecdsa = "0.16.9"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+bs58 = "0.5"
+ed25519-dalek = "2.1"
+hex = "0.4"
