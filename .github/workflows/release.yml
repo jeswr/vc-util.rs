@@ -61,13 +61,13 @@ jobs:
           # Determine version bump based on commit messages
           if echo "$COMMITS" | grep -q "^BREAKING CHANGE:\|^[a-zA-Z]*!:"; then
             # Major version bump for breaking changes
-            cargo release major --no-confirm --no-publish
+            cargo release major --no-confirm
           elif echo "$COMMITS" | grep -q "^feat:"; then
             # Minor version bump for new features
-            cargo release minor --no-confirm --no-publish
+            cargo release minor --no-confirm
           elif echo "$COMMITS" | grep -q "^fix:\|^perf:\|^refactor:"; then
             # Patch version bump for fixes and improvements
-            cargo release patch --no-confirm --no-publish
+            cargo release patch --no-confirm
           else
             echo "No version bump needed"
             exit 0
