@@ -20,6 +20,8 @@ jobs:
         with:
           toolchain: stable
           override: true
+      - name: Generate test data
+        run: bash setup.sh
       - name: Build
         run: cargo build --verbose
       - name: Run tests
