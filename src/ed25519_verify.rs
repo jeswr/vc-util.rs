@@ -11,10 +11,10 @@ use crate::Ed25519Preprocessed;
 
 #[derive(Serialize, Deserialize)]
 pub struct VerifyInput {
-    canonical_document: String,
-    canonical_proof: String,
-    public_key: String,
-    proof: String,
+    pub canonical_document: String,
+    pub canonical_proof: String,
+    pub public_key: String,
+    pub proof: String,
 }
 
 pub fn ed25519_verify(verify: VerifyInput) -> Result<(), String> {
