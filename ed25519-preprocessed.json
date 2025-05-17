@@ -1,0 +1,23 @@
+{
+  "verifyData": {
+    "proofHash": "ce272678957556b11bbe6ebc5560bed7eb480dd1ea5661fe305a2edf3fe7be19",
+    "docHash": "f769f8468bb30660cf2cb63b6d1a2a64708b26e10178e3d55ed891576395dfc4",
+    "concatHash": "ce272678957556b11bbe6ebc5560bed7eb480dd1ea5661fe305a2edf3fe7be19f769f8468bb30660cf2cb63b6d1a2a64708b26e10178e3d55ed891576395dfc4",
+    "canonicalProof": "_:c14n0 <http://purl.org/dc/terms/created> \"2025-05-17T17:34:33Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/security#Ed25519Signature2020> .\n_:c14n0 <https://w3id.org/security#proofPurpose> <https://w3id.org/security#assertionMethod> .\n_:c14n0 <https://w3id.org/security#verificationMethod> <did:example:bob#key-1> .\n",
+    "canonicalDocument": "<did:example:2a2f5b4e-6678-4cc5-a757-944d03a7d183> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/vdl#LicensedDriver> .\n<did:example:2a2f5b4e-6678-4cc5-a757-944d03a7d183> <https://w3id.org/vdl#license> _:c14n0 .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/vdl#Iso18013DriversLicenseCredential> .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://www.w3.org/2018/credentials#VerifiableCredential> .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://schema.org/description> \"A license granting driving privileges in Utopia.\" .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://schema.org/image> <data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUg...kSuQmCC> .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://schema.org/name> \"Utopia Driver's License\" .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://www.w3.org/2018/credentials#credentialSubject> <did:example:2a2f5b4e-6678-4cc5-a757-944d03a7d183> .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://www.w3.org/2018/credentials#issuer> <did:example:bob> .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://www.w3.org/2018/credentials#validFrom> \"2023-12-03T12:19:52Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n<urn:uuid:db7ac65c-3899-4db3-8643-b39e57ee8462> <https://www.w3.org/2018/credentials#validUntil> \"2028-12-03T12:19:52Z\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n_:c14n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/vdl#Iso18013DriversLicense> .\n_:c14n0 <https://w3id.org/vdl#documentNumber> \"542426814\" .\n_:c14n0 <https://w3id.org/vdl#drivingPrivileges> \"[{\\\"codes\\\":[{\\\"code\\\":\\\"D\\\"}],\\\"expiry_date\\\":\\\"2027-01-01\\\",\\\"issue_date\\\":\\\"2019-01-01\\\",\\\"vehicle_category_code\\\":\\\"D\\\"},{\\\"codes\\\":[{\\\"code\\\":\\\"C\\\"}],\\\"expiry_date\\\":\\\"2017-01-01\\\",\\\"issue_date\\\":\\\"2019-01-01\\\",\\\"vehicle_category_code\\\":\\\"C\\\"}]\"^^<http://www.w3.org/1999/02/22-rdf-syntax-ns#JSON> .\n_:c14n0 <https://w3id.org/vdl#expiryDate> \"2028-08-27T12:00:00-06:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n_:c14n0 <https://w3id.org/vdl#familyName> \"DOE\" .\n_:c14n0 <https://w3id.org/vdl#givenName> \"JOHN\" .\n_:c14n0 <https://w3id.org/vdl#issueDate> \"2023-01-15T10:00:00-07:00\"^^<http://www.w3.org/2001/XMLSchema#dateTime> .\n_:c14n0 <https://w3id.org/vdl#issuingAuthority> \"UADMV\" .\n_:c14n0 <https://w3id.org/vdl#issuingCountry> \"UA\" .\n_:c14n0 <https://w3id.org/vdl#portrait> <data:image/jpeg;base64,/9j/4AAQSkZJR...RSClooooP/2Q==> .\n_:c14n0 <https://w3id.org/vdl#sex> \"2\"^^<http://www.w3.org/2001/XMLSchema#unsignedInt> .\n_:c14n0 <https://w3id.org/vdl#unDistinguishingSign> \"UTA\" .\n_:c14n0 <https://w3id.org/vdl/aamva#akaSuffix> \"1ST\" .\n_:c14n0 <https://w3id.org/vdl/aamva#familyNameTruncation> \"N\" .\n_:c14n0 <https://w3id.org/vdl/aamva#givenNameTruncation> \"N\" .\n"
+  },
+  "verificationMethod": {
+    "@context": "https://w3id.org/security/multikey/v1",
+    "id": "did:example:bob#key-1",
+    "type": "Multikey",
+    "controller": "did:example:bob",
+    "publicKeyMultibase": "z6MkotXhvArku5nwpipfuzA7Kqv6eA2RPiQjokNHby2Ge6xM"
+  },
+  "proof": {
+    "type": "Ed25519Signature2020",
+    "created": "2025-05-17T17:34:33Z",
+    "verificationMethod": "did:example:bob#key-1",
+    "proofPurpose": "assertionMethod",
+    "proofValue": "zAKvRm5ZLjds14Z5h9Ux4x1q5v1znzkYsnpmbQQKE5F5VhomZJ5jQmrQ1u2i7YiKTDGmTUrnpn7RDcii21H8c3ZR"
+  }
+}
