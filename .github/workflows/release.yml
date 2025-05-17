@@ -30,60 +30,10 @@ jobs:
   release:
     name: Release
     needs: test
-    runs-on: ubuntu-latest
     permissions:
       contents: write
       packages: write
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          override: true
-      - name: Install cargo-semver-checks
-        run: cargo install cargo-semver-checks
-      - name: Install cargo-release
-        run: cargo install cargo-release
-      - name: Configure Git
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "github-actions@github.com"
-      - name: Release
-        run: |
-          # Get the latest version from Cargo.toml
-          CURRENT_VERSION=$(cargo metadata --format-version=1 | jq -r '.packages[0].version')
-          
-          # Get commit messages since last tag
-          COMMITS=$(git log $(git describe --tags --abbrev=0 2>/dev/null || git rev-list --max-parents=0 HEAD)..HEAD --pretty=format:"%s")
-          
-          # Determine version bump based on commit messages
-          if echo "$COMMITS" | grep -q "^BREAKING CHANGE:\|^[a-zA-Z]*!:"; then
-            # Major version bump for breaking changes
-            cargo release major --no-confirm
-          elif echo "$COMMITS" | grep -q "^feat:"; then
-            # Minor version bump for new features
-            cargo release minor --no-confirm
-          elif echo "$COMMITS" | grep -q "^fix:\|^perf:\|^refactor:"; then
-            # Patch version bump for fixes and improvements
-            cargo release patch --no-confirm
-          else
-            echo "No version bump needed"
-            exit 0
-          fi
-          
-          # Get the new version
-          NEW_VERSION=$(cargo metadata --format-version=1 | jq -r '.packages[0].version')
-          
-          if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
-            # Create and push tag
-            git tag -a "v$NEW_VERSION" -m "Release v$NEW_VERSION"
-            git push origin "v$NEW_VERSION"
-            
-            # Publish to crates.io
-            cargo publish --verbose
-          fi
-        env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
-          GITHUB_TOKEN: ${{ github.token }} 
+    uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
+    secrets:
+        cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+        github_app_private_key: ${{ github.token }}
