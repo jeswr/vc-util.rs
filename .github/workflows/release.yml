@@ -33,14 +33,15 @@ jobs:
     permissions:
       contents: write
       packages: write
-    
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
-    with:
-      targets: |
-        x86_64-unknown-linux-gnu
-        aarch64-unknown-linux-gnu
-        x86_64-apple-darwin
-        aarch64-apple-darwin
+    strategy:
+      matrix:
+        target:
+          - aarch64-unknown-linux-gnu
+        binary_name:
+          - vc_utils
+        host:
+          - ubuntu-latest
     secrets:
         cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
         github_app_private_key: ${{ github.token }}
