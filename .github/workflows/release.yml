@@ -36,12 +36,8 @@ jobs:
     uses: semantic-release-action/rust/.github/workflows/release-binary.yml@v5
     strategy:
       matrix:
-        target:
-          - aarch64-unknown-linux-gnu
-        binary_name:
-          - vc_utils
-        host:
-          - ubuntu-latest
+        build:
+          - { target: aarch64-unknown-linux-gnu, binary_name: vc_utils, host: ubuntu-latest }
     secrets:
         cargo-registry-token: ${{ secrets.CARGO_REGISTRY_TOKEN }}
         github_app_private_key: ${{ github.token }}
